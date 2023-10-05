@@ -7,6 +7,7 @@ function App() {
         <div className="card">
           <div className="card-image">
             <img src="./sea.jpg" alt="surfing"/>
+            <div>Hello World</div>
           </div>
         </div>
       </div>
