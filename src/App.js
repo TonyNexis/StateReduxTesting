@@ -1,9 +1,5 @@
-import { Provider } from 'react-redux'
-
-import store from './redux/store';
-import Likes from './likes';
-
 import './App.css';
+import Likes from './likes';
 
 function App() {
   return (
@@ -12,7 +8,7 @@ function App() {
           <div className="card">
             <div className="card-image">
               <img src="./sea.jpg" alt="surfing"/>
-              <Likes store={store}/>
+              <Likes/>
             </div>
           </div>
         </div>

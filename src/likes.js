@@ -1,20 +1,18 @@
-import connect from 'react-redux';
-;
-function Likes (props) {
-    console.log(props);
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from './redux/likesSlice'
+
+function Likes () {
+    const likes = useSelector(state => state.likes.value)
+    console.log(likes)
+    const dispatch = useDispatch()
     return (
         <div className="button-controls">
-            <button>❤ {props.likes}</button>
-            <button>Dislike</button>
+            <button onClick={() => dispatch(increment())}>❤ {likes}</button>
+            <button onClick={() => dispatch(decrement())}>Dislike</button>
         </div>
     )
 }
 
-function mapStateToProps(state) {
-    console.log("mapStateToProps >", state)
-    return {
-        likes: state.likes
-    }
-}
+export default Likes;
 
-export default connect(mapStateToProps)(Likes);
