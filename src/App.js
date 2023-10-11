@@ -1,5 +1,6 @@
 import './App.css';
 import Likes from './likes';
+import Comments from './Comments';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
               <img src="./sea.jpg" alt="surfing"/>
               <Likes/>
             </div>
+            <Comments/>
           </div>
         </div>
       </div>
