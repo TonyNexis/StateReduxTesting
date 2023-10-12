@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { commentCreate } from './redux/commentsSlice'
+import { commentCreate } from './redux/commentsSlice';
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import SingleComment from './SingleComment';
 
@@ -22,13 +23,20 @@ function Comments() {
     const comments = useSelector(state => state.comments)
     return (
         <div className="card-comments">
-            <form onSubmit={handleSubmit} action="comments-item-create">
-                <input type="text" value={textComment} onChange={handleInput} />
+            <form className="comment-card" onSubmit={handleSubmit} action="comments-item-create">
+                <input className="input-card" type="text" value={textComment} onChange={handleInput} />
                 <input type="submit" hidden />
             </form>
-            {comments.map((comment) => (
-                <SingleComment key={comment.id} id={comment.id} text={comment.text} />
-             ))}
+            <TransitionGroup className="todo-list">
+                {comments.map((comment) => (
+                    <CSSTransition
+                    key={comment.id}
+                    timeout={500}
+                    classNames="my-node">
+                        <SingleComment key={comment.id} id={comment.id} text={comment.text} />
+                    </CSSTransition>
+                ))}
+             </TransitionGroup>
         </div>
     )
 }

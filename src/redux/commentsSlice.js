@@ -13,8 +13,13 @@ export const CommentsSlice = createSlice({
               return { payload: { id, text} }
             },
           },
+        commentDelete: {
+          reducer: (state, action) => {
+            return state.filter(comment => comment.id !== action.payload);
+          }
+        }
     }
 })
 
-export const { commentCreate } = CommentsSlice.actions
+export const { commentCreate, commentDelete } = CommentsSlice.actions
 export default CommentsSlice.reducer

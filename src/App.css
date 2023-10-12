@@ -104,4 +104,79 @@ input {
   border: 1px solid rgba(10, 10, 10, 0.25);
 }
 
+.close-btn {
+  border: none;
+  padding: 0px 7px 0px 7px;
+  margin: 5px;
+  position: absolute;
+  right: 0;
+  transition: transform 1s;
+}
 
+.close-btn:hover {
+  color: red;
+  animation: spin 1s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.comment-card {
+  display: flex;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);;
+  padding: 5px 10px 5px 10px;
+  position: relative;
+  /* justify-content: center; */
+  align-items: center;
+  margin-bottom: 15px;
+  margin-right: 5px;
+  transition: border 1s;
+}
+
+.comment-card:hover {
+  animation: border 1s;
+  border: 1px solid rgba(0, 0, 0, 1);
+}
+
+@keyframes border {
+  0% {
+    border: 0px solid rgba(0, 0, 0, 0);
+  }
+  100% {
+    border: 1px solid rgba(0, 0, 0, 1);
+  }
+}
+
+.input-card {
+  padding: 0;
+}
+
+.my-node-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.my-node-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.my-node-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.my-node-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 200ms, transform 200ms;
+}
