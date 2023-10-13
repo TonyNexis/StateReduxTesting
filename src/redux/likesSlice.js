@@ -11,5 +11,7 @@ export const LikesSlice = createSlice({
     }
 })
 
+export const selectLikes = (state) => state.likes.value
+
 export const { increment, decrement } = LikesSlice.actions
 export default LikesSlice.reducer

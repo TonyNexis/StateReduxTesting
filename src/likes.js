@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from './redux/likesSlice'
+import { decrement, increment, selectLikes } from './redux/likesSlice'
 
 function Likes () {
-    const likes = useSelector(state => state.likes.value)
+    const likes = useSelector(selectLikes)
     console.log(likes)
     const dispatch = useDispatch()
     return (

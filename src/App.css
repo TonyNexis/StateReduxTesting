@@ -127,9 +127,35 @@ input {
   }
 }
 
+.reg-btn {
+  border: none;
+  padding: 0px 7px 0px 7px;
+  margin: 35px;
+  position: absolute;
+  right: 0;
+  transition: transform 1s;
+}
+
+.reg-btn:hover {
+  color: red;
+  animation: rotate 1s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 .comment-card {
   display: flex;
-  border: 0px solid rgba(0, 0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);;
   padding: 5px 10px 5px 10px;
@@ -148,7 +174,7 @@ input {
 
 @keyframes border {
   0% {
-    border: 0px solid rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0);
   }
   100% {
     border: 1px solid rgba(0, 0, 0, 1);
