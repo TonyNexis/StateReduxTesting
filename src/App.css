@@ -133,12 +133,12 @@ input {
   margin: 35px;
   position: absolute;
   right: 0;
-  transition: transform 1s;
+  /* transition: transform 1s; */
 }
 
 .reg-btn:hover {
   color: red;
-  animation: rotate 1s;
+  /* animation: rotate 1s; */
 }
 
 @keyframes rotate {
@@ -164,11 +164,12 @@ input {
   align-items: center;
   margin-bottom: 15px;
   margin-right: 5px;
-  transition: border 1s;
+  transition: border 0.3s;
+  min-height: 42px;
 }
 
 .comment-card:hover {
-  animation: border 1s;
+  animation: border 0.3s;
   border: 1px solid rgba(0, 0, 0, 1);
 }
 
@@ -205,4 +206,16 @@ input {
   opacity: 0;
   transform: translateX(100%);
   transition: opacity 200ms, transform 200ms;
+}
+
+.edit-textarea {
+ border: none;
+ padding: 0;
+ height: 24px;
+ all: initial;
+ font-size: 18px;
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+ height: 24px;
+ color: red;
+ width: 350px;
 }
