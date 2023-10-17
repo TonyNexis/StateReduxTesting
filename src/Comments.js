@@ -32,7 +32,7 @@ function Comments() {
                 <input className="input-card" type="text" value={textComment} onChange={handleInput} />
                 <input type="submit" hidden />
             </form>
-            <TransitionGroup className="todo-list">
+            {/* <TransitionGroup className="todo-list">
                 {comments.map((comment) => (
                     <CSSTransition
                     key={comment.id}
@@ -41,7 +41,7 @@ function Comments() {
                         <SingleComment key={comment.id} id={comment.id} text={comment.text} />
                     </CSSTransition>
                 ))}
-             </TransitionGroup>
+             </TransitionGroup> */}
         </div>
     )
 }

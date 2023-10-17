@@ -2,21 +2,19 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 export const CommentsSlice = createSlice({
     name: 'comments',
-    initialState: [{id: 'BGMGYc4NYCSpK87Bw9OLf', text: 'test comment'}],
+    initialState: [],
     reducers: {
       commentGet: {
         reducer: (state, action) => {
             // Устанавливаем данные из action.payload в состояние
             // state.push(action.payload)
-            console.log(action)
-
+            Array.prototype.push.apply(state, action.payload);
         },
         prepare: async () => {
             try {
                 const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10');
                 const json = await response.json();
-                
-                console.log(json)
+                console.log('prepare >>', json);
                 return {
                     payload: json
                 };
