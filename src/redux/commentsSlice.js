@@ -4,6 +4,30 @@ export const CommentsSlice = createSlice({
     name: 'comments',
     initialState: [{id: 'BGMGYc4NYCSpK87Bw9OLf', text: 'test comment'}],
     reducers: {
+      commentGet: {
+        reducer: (state, action) => {
+            // Устанавливаем данные из action.payload в состояние
+            // state.push(action.payload)
+            console.log(action)
+
+        },
+        prepare: async () => {
+            try {
+                const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10');
+                const json = await response.json();
+                
+                console.log(json)
+                return {
+                    payload: json
+                };
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return {
+                    payload: [] // Если возникла ошибка при загрузке данных, возвращаем пустой массив
+                };
+            }
+        },
+    },
         commentCreate: {
             reducer: (state, action) => {
               state.push(action.payload)
@@ -30,5 +54,5 @@ export const CommentsSlice = createSlice({
     }
 })
 
-export const { commentCreate, commentDelete, commentEdit } = CommentsSlice.actions
+export const { commentCreate, commentDelete, commentEdit, commentGet } = CommentsSlice.actions
 export default CommentsSlice.reducer

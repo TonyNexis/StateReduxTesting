@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { commentCreate } from './redux/commentsSlice';
+import { commentCreate, commentGet } from './redux/commentsSlice';
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import SingleComment from './SingleComment';
@@ -8,6 +8,11 @@ import SingleComment from './SingleComment';
 function Comments() {
     const [textComment, setTextComment] = useState('');
     const dispatch = useDispatch();
+
+    useEffect ((state) => {
+        dispatch(commentGet());
+        console.log(state)
+    }, [])
 
     const handleInput = (e) => {
         setTextComment(e.target.value);

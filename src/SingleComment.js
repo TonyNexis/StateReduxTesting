@@ -21,6 +21,15 @@ function SingleComment(props) {
         }
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            setToggleBtn(true);
+            setRegBtn('✎');
+            dispatch(commentEdit({ id, text: editedText }));
+        }
+    }
+
     useEffect(() => {
         setEditedText(text);
     }, [text]);
@@ -42,6 +51,7 @@ function SingleComment(props) {
                     value={editedText}
                     onChange={handleTextChange}
                     className="edit-textarea"
+                    onKeyDown={handleKeyDown}
                 />
             ) : (
                 <div>{editedText}</div>
