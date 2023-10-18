@@ -9,10 +9,27 @@ function Comments() {
     const [textComment, setTextComment] = useState('');
     const dispatch = useDispatch();
 
-    useEffect ((state) => {
-        dispatch(commentGet());
-        console.log(state)
-    }, [])
+    useEffect(() => {
+        async function fetchData() {
+          try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10'); // Замените на URL вашего API
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const jsonData = await response.json();
+            const comments = jsonData.map(item => ({
+                id: item.id,
+                text: item.title
+            }))
+            dispatch(commentGet(comments));
+          } catch (error) {
+            console.log(error)
+          }
+        }
+    
+        fetchData();
+        
+      }, []);
 
     const handleInput = (e) => {
         setTextComment(e.target.value);
@@ -32,7 +49,7 @@ function Comments() {
                 <input className="input-card" type="text" value={textComment} onChange={handleInput} />
                 <input type="submit" hidden />
             </form>
-            {/* <TransitionGroup className="todo-list">
+            <TransitionGroup className="todo-list">
                 {comments.map((comment) => (
                     <CSSTransition
                     key={comment.id}
@@ -41,7 +58,7 @@ function Comments() {
                         <SingleComment key={comment.id} id={comment.id} text={comment.text} />
                     </CSSTransition>
                 ))}
-             </TransitionGroup> */}
+             </TransitionGroup>
         </div>
     )
 }
