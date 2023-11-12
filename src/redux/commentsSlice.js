@@ -5,16 +5,14 @@ import { spinnerDisplayOff, spinnerDisplayOn } from "./spinnerSlice";
 const apiUrl = 'https://jsonplaceholder.typicode.com/todos?_limit=10';
 const apiUrlPost = 'https://jsonplaceholder.typicode.com/posts';
 
-export const sendCommentToServer = createAsyncThunk('comments/sendCommentToServer', async (comments) => {
+export const sendCommentToServer = createAsyncThunk('comments/sendCommentToServer', async (text) => {
   try {
     const response = await fetch(apiUrlPost, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        title: comments, // Assuming 'title' is the field name in the server for the comment text
-      }),
+      body: JSON.stringify({ text }),
     });
 
     if (!response.ok) {
@@ -23,12 +21,17 @@ export const sendCommentToServer = createAsyncThunk('comments/sendCommentToServe
 
     const jsonData = await response.json();
 
+    // Use the id from the server response as the comment id
+    const comment = { id: jsonData.id, text };
+
     // You can return any data received from the server if needed
-    return jsonData;
+    return comment;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    throw error; // Re-throw the error to inform the caller about the failure
   }
 });
+
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async (_, {dispatch}) => {
   try {
@@ -81,7 +84,7 @@ export const CommentsSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder
-        .addCase(fetchComments.fulfilled, (state, action) => {
+      .addCase(fetchComments.fulfilled, (state, action) => {
         state.push(...action.payload)
         console.log('success status')
       })
@@ -93,6 +96,7 @@ export const CommentsSlice = createSlice({
       })
       .addCase(sendCommentToServer.fulfilled, (state, action) => {
         console.log('Comment sent to server successfully:', action.payload);
+        state.push(action.payload)
       })
       .addCase(sendCommentToServer.rejected, (state, action) => {
         console.log('Failed to send comment to server:', action.error);

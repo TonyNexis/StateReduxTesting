@@ -24,8 +24,8 @@ function Comments() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('submit >>>', textComment);
-        dispatch(commentCreate(textComment));
-        dispatch(sendCommentToServer())
+        // dispatch(commentCreate(textComment));
+        dispatch(sendCommentToServer(textComment))
         setTextComment('');
     }
 
