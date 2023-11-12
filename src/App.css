@@ -35,6 +35,10 @@
 .card-comments {
   flex: 1 0 40%;
   max-width: 40%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  position: relative;
 }
 .comments-item {
   display: flex;
@@ -218,4 +222,15 @@ input {
  height: 24px;
  color: red;
  width: 350px;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.todo-list {
+  min-height: 500px;
 }

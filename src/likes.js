@@ -4,7 +4,6 @@ import { decrement, increment, selectLikes } from './redux/likesSlice'
 
 function Likes () {
     const likes = useSelector(selectLikes)
-    console.log(likes)
     const dispatch = useDispatch()
     return (
         <div className="button-controls">

@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import likesSlice from "./likesSlice";
 import commentsSlice from "./commentsSlice";
+import likesSlice from "./likesSlice";
+import spinnerSlice from './spinnerSlice';
 
 const store = configureStore({
     reducer: {
         likes: likesSlice,
-        comments: commentsSlice
+        comments: commentsSlice,
+        spinner: spinnerSlice
     }
 })
 

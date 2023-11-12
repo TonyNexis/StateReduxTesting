@@ -1,35 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { commentCreate, commentGet } from './redux/commentsSlice';
+import { commentCreate, fetchComments, sendCommentToServer } from './redux/commentsSlice';
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { spinnerDisplay } from "./redux/spinnerSlice";
 
+import Spinner from "./spinner";
 import SingleComment from './SingleComment';
 
 function Comments() {
     const [textComment, setTextComment] = useState('');
     const dispatch = useDispatch();
+    let display = useSelector(spinnerDisplay)
 
-    useEffect(() => {
-        async function fetchData() {
-          try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10'); // Замените на URL вашего API
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            const jsonData = await response.json();
-            const comments = jsonData.map(item => ({
-                id: item.id,
-                text: item.title
-            }))
-            dispatch(commentGet(comments));
-          } catch (error) {
-            console.log(error)
-          }
-        }
-    
-        fetchData();
-        
-      }, []);
+
+    useEffect (() => {
+      dispatch(fetchComments());
+    }, [])
 
     const handleInput = (e) => {
         setTextComment(e.target.value);
@@ -39,12 +25,14 @@ function Comments() {
         e.preventDefault();
         console.log('submit >>>', textComment);
         dispatch(commentCreate(textComment));
+        dispatch(sendCommentToServer())
         setTextComment('');
     }
 
     const comments = useSelector(state => state.comments)
     return (
         <div className="card-comments">
+            {display ? <Spinner/> : null}
             <form className="comment-card" onSubmit={handleSubmit} action="comments-item-create">
                 <input className="input-card" type="text" value={textComment} onChange={handleInput} />
                 <input type="submit" hidden />
